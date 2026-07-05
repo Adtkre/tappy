@@ -1,0 +1,12 @@
+__pycache__/
+build/
+dist/
+.vscode/
+tempCodeRunnerFile.py
+
+**/.gradle/
+**/.dart_tool/
+**/build/
+**/.idea/
+**/ephemeral/
+**/local.properties

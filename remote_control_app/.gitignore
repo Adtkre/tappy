@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+
+# Build output
+build/
+dist/
+
+# VS Code
+.vscode/
+tempCodeRunnerFile.py
+
+# Flutter
+remote_control_app/.dart_tool/
+remote_control_app/build/
+remote_control_app/.idea/
+
+# Android Gradle cache
+remote_control_app/android/.gradle/
+remote_control_app/android/local.properties
+
+# Flutter generated
+remote_control_app/ios/Flutter/ephemeral/
+remote_control_app/linux/flutter/ephemeral/
+remote_control_app/windows/flutter/ephemeral/
+remote_control_app/macos/Flutter/ephemeral/
