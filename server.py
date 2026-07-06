@@ -4,17 +4,15 @@ import threading
 import socket
 import time
 import tkinter as tk
-
+import os
 app = Flask(__name__)
 
 BROADCAST_PORT = 5051
 BROADCAST_MSG_PREFIX = "TAPPY_SERVER:"
 
-# ---------------------------------------------------------------------------
-# Shared connection state (Flask thread aur Tkinter GUI dono isko use karte hain)
-# ---------------------------------------------------------------------------
+
 state_lock = threading.Lock()
-connected_client_name = None   # None = koi connect nahi hai, warna phone ka naam
+connected_client_name = None   
 
 
 def get_local_ip():
@@ -45,9 +43,6 @@ def broadcast_presence():
         time.sleep(2)
 
 
-# ---------------------------------------------------------------------------
-# Flask routes
-# ---------------------------------------------------------------------------
 
 @app.route('/connect', methods=['POST'])
 def connect():
@@ -128,14 +123,11 @@ def run_flask():
     app.run(host='0.0.0.0', port=5000)
 
 
-# ---------------------------------------------------------------------------
-# Simple GUI window - jab tak ye khuli hai, laptop connectable hai.
-# Band karte hi poora process exit ho jata hai -> phone khud-ba-khud disconnect
-# ho jayega (agla request fail hoga).
-# ---------------------------------------------------------------------------
+
 
 def run_gui():
     root = tk.Tk()
+    icon_path = os.path.join(os.path.dirname(__file__), "logo.ico")
     root.title("Tappy")
     root.geometry("320x220")
     root.resizable(False, False)
@@ -176,9 +168,8 @@ def run_gui():
 
     def on_close():
         root.destroy()
-        os._exit(0)  # background threads (flask/broadcast) daemon hain, seedha exit safe hai
-
-    import os
+        os._exit(0)  
+   
     root.protocol("WM_DELETE_WINDOW", on_close)
     refresh()
     root.mainloop()
@@ -187,4 +178,4 @@ def run_gui():
 if __name__ == '__main__':
     threading.Thread(target=run_flask, daemon=True).start()
     threading.Thread(target=broadcast_presence, daemon=True).start()
-    run_gui()  # main thread; window band hote hi pura app band ho jata hai
+    run_gui()  
