@@ -8,15 +8,12 @@ const int kBroadcastPort = 5051;       // server.py isi port pe broadcast karta 
 const String kBroadcastPrefix = 'TAPPY_SERVER:';
 const String kMyDeviceName = 'My Phone';
 
-// ---------------------------------------------------------------------------
-// Palette — Milk Chocolate is the base surface everywhere, that's what makes
-// the neumorphism read correctly (shadows need a flat base to sit on top of).
-// ---------------------------------------------------------------------------
+
 const Color kAntiqueWhite = Color(0xFFF7EBDF);
 const Color kPaleTaupe = Color(0xFFB7A087);
 const Color kMilkChocolate = Color(0xFF825A3C);
-const Color kVanDykeBrown = Color(0xFF5C3E28); // swap in the real hex if you have it
-const Color kOnline = Color(0xFF8FBF8F); // muted sage green, just for the status dot
+const Color kVanDykeBrown = Color(0xFF5C3E28); 
+const Color kOnline = Color(0xFF8FBF8F); 
 
 void main() {
   runApp(RemoteControlApp());
@@ -40,9 +37,7 @@ class RemoteControlApp extends StatelessWidget {
   }
 }
 
-// ---------------------------------------------------------------------------
-// Neumorphic primitives
-// ---------------------------------------------------------------------------
+
 class Neu extends StatelessWidget {
   final Widget child;
   final double radius;
@@ -84,10 +79,8 @@ class Neu extends StatelessWidget {
   }
 }
 
-// Circular neumorphic button — used for icon-only actions (back, disconnect,
-// connect arrow, dashboard controls). This alone kills the "kid built it" look
-// because it replaces every wide text pill with something a control panel
-// would actually use.
+
+
 class NeuIconButton extends StatefulWidget {
   final IconData icon;
   final VoidCallback? onPressed;
@@ -137,8 +130,7 @@ class _NeuIconButtonState extends State<NeuIconButton> {
   }
 }
 
-// Square-ish dashboard tile — icon on top, label under it. Used for the
-// click/scroll controls so they read as a control grid, not a button list.
+
 class NeuTile extends StatefulWidget {
   final IconData icon;
   final String label;
@@ -247,7 +239,7 @@ class _NearbyLaptopsScreenState extends State<NearbyLaptopsScreen> {
         }
       });
     } catch (e) {
-      // Search fail hui to bhi manual entry available rahegi
+     
     }
 
     _cleanupTimer = Timer.periodic(Duration(seconds: 2), (_) {

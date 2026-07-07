@@ -28,8 +28,7 @@ def get_local_ip():
 
 
 def broadcast_presence():
-    """Jab tak app khuli hai, LAN pe apna IP + laptop ka naam broadcast karta rehta hai
-    taaki phone 'Nearby Laptops' list mein isse dhoond sake."""
+   
     sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM, socket.IPPROTO_UDP)
     sock.setsockopt(socket.SOL_SOCKET, socket.SO_BROADCAST, 1)
     hostname = socket.gethostname()
@@ -46,7 +45,7 @@ def broadcast_presence():
 
 @app.route('/connect', methods=['POST'])
 def connect():
-    """Phone yahan se session shuru karta hai. Ek time pe sirf ek hi phone connect ho sakta hai."""
+   
     global connected_client_name
     data = request.json or {}
     name = data.get('name', 'Unknown phone')
@@ -123,23 +122,13 @@ def run_flask():
     app.run(host='0.0.0.0', port=5000)
 
 
-# ---------------------------------------------------------------------------
-# Neumorphic Tkinter GUI
-#
-# Tkinter has no blur/opacity for canvas shapes, so the "soft shadow" trick is
-# faked with two solid rounded-rect duplicates behind the main panel: one
-# offset down-right in Van Dyke Brown (dark shadow), one offset up-left in
-# Pale Taupe (light shadow). A flat Milk Chocolate panel sits on top. Same
-# palette and logic as the phone app, just redrawn with the Tk primitives
-# available here.
-# ---------------------------------------------------------------------------
 ANTIQUE_WHITE = "#F7EBDF"
 PALE_TAUPE = "#B7A087"
 MILK_CHOCOLATE = "#825A3C"
-VAN_DYKE_BROWN = "#5C3E28"   # swap in the exact hex if you have it
+VAN_DYKE_BROWN = "#5C3E28"   
 ONLINE_GREEN = "#8FBF8F"
 
-FONT_FAMILY = "Segoe UI"     # same font already used in the original file
+FONT_FAMILY = "Segoe UI"     
 
 
 def _rounded_points(x1, y1, x2, y2, radius):
@@ -185,10 +174,7 @@ def draw_neu_panel(canvas, x1, y1, x2, y2, radius=18, depth=5, pressed=False):
 
 
 class NeuButton:
-    """A full-width neumorphic button drawn on its own canvas (not a raw
-    tk.Button), so it stays visually anchored to the card instead of floating
-    with default OS padding. Presses inward on click, matches the disabled
-    state used on the phone app (muted Pale Taupe, no interaction)."""
+   
 
     def __init__(self, parent, width, height, text, command=None, radius=16, depth=5):
         self.width, self.height = width, height
@@ -275,7 +261,7 @@ def run_gui():
         bg=MILK_CHOCOLATE, fg=PALE_TAUPE,
     ).pack(pady=(0, 18))
 
-    # IP pill — recessed panel, like an input field on the phone app
+   
     ip_canvas = tk.Canvas(outer, width=296, height=48, bg=MILK_CHOCOLATE, highlightthickness=0)
     ip_canvas.pack()
     draw_neu_panel(ip_canvas, 6, 6, 290, 42, radius=14, depth=4, pressed=True)
@@ -286,7 +272,7 @@ def run_gui():
 
     tk.Frame(outer, bg=MILK_CHOCOLATE, height=20).pack()
 
-    # Status card — raised panel with a status dot + status text
+   
     status_canvas = tk.Canvas(outer, width=296, height=150, bg=MILK_CHOCOLATE, highlightthickness=0)
     status_canvas.pack()
 
